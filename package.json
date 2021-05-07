@@ -1,0 +1,28 @@
+{
+  "name": "virtualDom_diff",
+  "version": "1.0.0",
+  "description": "Vue's virtual DOM and Diff algorithms",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/longer790164074/virtualDom_diff.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/longer790164074/virtualDom_diff/issues"
+  },
+  "homepage": "https://github.com/longer790164074/virtualDom_diff#readme",
+  "dependencies": {
+    "snabbdom": "^3.0.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.36.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
