@@ -1,3 +1,3 @@
-export default (sel,data,childen,text,elm)=>{
-  return {sel,data,childen,text,elm}
+export default (sel,data,children,text,elm)=>{
+  return {sel,data,children,text,elm}
 }

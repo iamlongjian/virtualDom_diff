@@ -7,12 +7,16 @@ export default (oldVnode,newVnode)=>{
     // 传入的第一个参数是DOM节点，则包装成虚拟节点
     oldVnode = vNode(oldVnode.tagName.toLowerCase(),{},[],undefined,oldVnode)
   }
-  console.log(oldVnode)
   // 判断oldVnode,newVnode是不是同一个节点
   if(oldVnode.key === newVnode.key && oldVnode.sel === newVnode.sel){
       console.log('同一个节点')
   }else{
-      console.log('不是同一个')
-      createElement(newVnode,oldVnode.elm)
+     let newVnodeElm = createElement(newVnode)
+      // 挂载到DOM树
+      if(newVnodeElm){
+        oldVnode.elm.parentNode.insertBefore(newVnodeElm,oldVnode.elm)
+      }
+      // 删除老节点
+      oldVnode.elm.parentNode.removeChild(oldVnode.elm)
   }
 }
