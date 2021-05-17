@@ -1,5 +1,7 @@
 
 import createElement from './createEle';
+import updateChildren from './updateChildren'
+
 export default function(oldVnode,newVnode){
     if(oldVnode !== newVnode){
         // 判断newVnode有没有text属性
@@ -14,6 +16,7 @@ export default function(oldVnode,newVnode){
             // 判断oldVnode有没有children属性
             if(Array.isArray(oldVnode.children) && oldVnode.children.length > 0){
                 // 最复杂的情况
+                updateChildren(oldVnode.elm,oldVnode.children,newVnode.children)
             }else{
                 // 意味着oldVnode有text
                 // ① 清空text
