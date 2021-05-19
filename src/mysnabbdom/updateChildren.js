@@ -1,3 +1,4 @@
+import createEle from './createEle'
 import patchVnode from './patchVnode'
 // 判断是否同一个虚拟节点
 function checkSameVnode(a,b){
@@ -61,7 +62,25 @@ export default function updateChildren(parentElm,oldch,newch){
             // 指针后移并且赋值
             oldEndVnode = oldch[--oldEndIdx]
             newStartVnode = newch[++newStartIdx]
+        }else{
+            // 都没有匹配
         }
+    }
+
+    // 继续看看有没有剩余的，循环结束了，start还是比end小
+    if(newStartIdx <= newEndIdx){
+        console.log('new还有剩余节点没有处理(有新增的节点)');
+        // new还有剩余节点没有处理(有新增的节点)
+        const before = newch[newEndIdx+1] == null ? null : newch[newEndIdx+1].elm
         
+        for (let index = newStartIdx; index <= newEndIdx; index++) {
+            parentElm.insertBefore(createEle(newch[index]),before)            
+        }
+    }else if(oldStartIdx <= oldEndIdx){
+        console.log('old还有剩余节点没有处理(有删除的节点)');
+        // old还有剩余节点没有处理(有删除的节点)
+        for (let index = oldStartIdx; index <= oldEndIdx; index++) {
+            parentElm.removeChild(oldch[index].elm)
+        }
     }
 }

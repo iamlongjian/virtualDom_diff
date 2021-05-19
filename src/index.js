@@ -24,10 +24,11 @@ const container = document.getElementById('container')
 patch(container,vNode1)
 
 const vNode2 = h('ul',{},[
-    h('li',{key:'D'},'D'),
-    h('li',{key:'C'},'C'),
+    h('li',{key:'A'},'A'),
     h('li',{key:'B'},'B'),
-    h('li',{key:'A'},'A')
+    h('li',{key:'C'},'C'),
+    h('li',{key:'D'},'D'),
+    h('li',{key:'E'},'E')
 ])
 const btn = document.getElementById('btn')
 btn.onclick = function(){
