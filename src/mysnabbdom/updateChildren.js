@@ -63,7 +63,40 @@ export default function updateChildren(parentElm,oldch,newch){
             oldEndVnode = oldch[--oldEndIdx]
             newStartVnode = newch[++newStartIdx]
         }else{
-            // 都没有匹配
+            // 四种匹配方式 都没有命中
+            console.log("四种都没有命中");
+            // 寻找 keyMap 一个映射对象， 就不用每次都遍历old对象了
+            if (!keyMap) {
+                keyMap = {};
+                // 记录oldVnode中的节点出现的key
+                // 从oldStartIdx开始到oldEndIdx结束，创建keyMap
+                for (let i = oldStartIdx; i <= oldEndIdx; i++) {
+                const key = oldCh[i].key;
+                if (key !== undefined) {
+                    keyMap[key] = i;
+                }
+                }
+            }
+            console.log(keyMap);
+            // 寻找当前项（newStartIdx）在keyMap中映射的序号
+            const idxInOld = keyMap[newStartVnode.key];
+            if (idxInOld === undefined) {
+                // 如果 idxInOld 是 undefined 说明是全新的项，要插入
+                // 被加入的项（就是newStartVnode这项)现不是真正的DOM节点
+                parentElm.insertBefore(createElement(newStartVnode), oldStartVnode.elm);
+            } else {
+                // 说明不是全新的项，要移动
+                const elmToMove = oldCh[idxInOld];
+                patchVnode(elmToMove, newStartVnode);
+                // 把这项设置为undefined，表示我已经处理完这项了
+                oldCh[idxInOld] = undefined;
+                // 移动，调用insertBefore也可以实现移动。
+                parentElm.insertBefore(elmToMove.elm, oldStartVnode.elm);
+            }
+
+            // newStartIdx++;
+            newStartVnode = newCh[++newStartIdx];
+            }
         }
     }
 
